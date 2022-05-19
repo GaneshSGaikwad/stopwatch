@@ -1,0 +1,16 @@
+<div>{{pageTitle}}</div>
+<div>
+    <h2>{{hour}} : {{minute}} : {{second}}</h2>
+    <div><button (click)="start()">Start </button>
+    <button (click)="stop()">Stop</button>
+    <button (click)="split()">Split</button>
+    <button (click)="reset()">Reset</button>
+
+    <table *ngFor="let print of lap">
+        <td>{{print.hour}}</td>:
+        <td>{{print.minute}}</td>:
+        <td>{{print.second}}</td>
+    </table>
+    
+</div>
+</div>
