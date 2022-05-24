@@ -1,16 +1,24 @@
 <div>{{pageTitle}}</div>
 <div>
-    <h2>{{hour}} : {{minute}} : {{second}}</h2>
-    <div><button (click)="start()">Start </button>
-    <button (click)="stop()">Stop</button>
-    <button (click)="split()">Split</button>
-    <button (click)="reset()">Reset</button>
+    <h2>{{Hour}} : {{Minute}} : {{Second}}</h2>
+    <div><button  [disabled]="Start1"  (click)="start()">Start </button>
+    <button
+    [disabled]="Stop1" 
+     (click)="stop()">Stop</button>
+    <button  [disabled]="Split1 && Split2"  (click)="split()">Split</button>
+    <button  [disabled]="Reset1 && Reset2"  (click)="reset()">Reset</button>
 
-    <table *ngFor="let print of lap">
+    <table>
+        <tr>
+            <th>Sprints</th>
+         </tr>
+     <tr *ngFor="let print of Lap">split
         <td>{{print.hour}}</td>:
         <td>{{print.minute}}</td>:
         <td>{{print.second}}</td>
-    </table>
+    </tr>
+   
+</table>
     
 </div>
 </div>

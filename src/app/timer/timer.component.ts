@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { Lap } from "../lap/lap.component";
+
+import { TimerService } from "../timer.service";
 
 @Component({
     selector:'sw-timer',
@@ -9,68 +10,65 @@ import { Lap } from "../lap/lap.component";
 export class Timer{
     pageTitle:string='Timer'
 
-    count:number=0;
-   interval: any;
+    constructor(private timerservice:TimerService){}
 
-   hour:number=0;
-   minute:number=0;
-   second:number=0;
-
-   flag:boolean=true;
-
-  lap:Lap[]=[];
-  
-
-    start():void{
-        
-        if(this.flag==true){
-        this.flag=false;
-        this.interval=setInterval(()=>{
-            this.count++
-           
-            if(this.count<60){
-                this.second=this.count;
-            } 
-            else if(this.count>60 && this.count<3600) {
-               this.minute=Math.floor(this.count/60);
-                this.second=Math.floor(this.count%60);
-        }
-        else if(this.count>3600 ) {
-           this.hour=Math.floor(this.count/3600);
-            this.minute =Math.floor(this.count/60);
-            this.second=this.count%60;
+    get Hour(){
+        return this.timerservice.Hour;
     }
 
-        },1000)
-
-       }   console.log("start")
+    get Minute(){
+         return this.timerservice.Minute;
     }
 
-    stop():void{
-       clearInterval(this.interval);
-        console.log("stop")
+    get Second(){
+        return this.timerservice.Second;
+   }
+
+      get Lap(){
+          return this.timerservice.Lap;
+      }
+
+      get Start1(){
+          return this.timerservice.Start1;
+      }
+
+      get Stop1(){
+        return this.timerservice.Stop1;
+      }
+
+      get Split1(){
+        return this.timerservice.Split1;
+      }
+      get Split2(){
+        return this.timerservice.Split2;
+      }
+
+      get Reset1(){
+          return this.timerservice.Reset1;
+      }
+      get Reset2(){
+        return this.timerservice.Reset2;
+    }
+    
+
+    start(){
+        this.timerservice.start();
     }
 
+    stop(){
+        this.timerservice.stop();
+    }
 
-
-    reset():void{
-        console.log("reset");
-        
-       this.second=this.minute=this.hour=this.count=0;
-       this.lap=[];
-
-      
+    reset(){
+        this.timerservice.reset();
     }
 
     split(){
-        const split=new Lap();
-        split.hour=this.hour;
-        split.minute=this.minute;
-        split.second=this.second;
-        this.lap.push(split);
-        console.log(split);
-
+        this.timerservice.split();
     }
 
+
+
+    
     
 }
